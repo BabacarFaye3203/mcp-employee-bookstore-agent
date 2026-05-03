@@ -25,7 +25,7 @@ Le projet utilise `uv` pour une gestion optimale des dépendances et de l'enviro
 ### Configuration
 1. Clonez le dépôt :
    ```bash
-   git clone <url-du-repo>
+   git clone https://github.com/BabacarFaye3203/mcp-employee-bookstore-agent.git
    cd mcp-employee-bookstore-agent
    ```
 
