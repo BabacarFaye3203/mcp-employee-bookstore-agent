@@ -85,6 +85,8 @@ Dans votre workflow n8n (voir `n8n.jpg`), utilisez le nœud **AI Agent** :
 <img width="1918" height="975" alt="n8n" src="https://github.com/user-attachments/assets/7caabb4e-68b3-4cd4-9eb7-255ee6023abf" />
 <img width="1918" height="981" alt="inspector" src="https://github.com/user-attachments/assets/a71f3c41-0ed9-42b1-9e0c-4b0f7ba9ca0f" />
 <img width="1896" height="437" alt="tavily" src="https://github.com/user-attachments/assets/9449cbbc-0f62-451e-b4af-b0b657fd39c5" />
+<img width="1918" height="1003" alt="server" src="https://github.com/user-attachments/assets/df50b995-16fb-4c4e-a68f-440cc3d6408b" />
+
 
 
 
