@@ -33,6 +33,7 @@ Le projet utilise `uv` pour une gestion optimale des dépendances et de l'enviro
    
 ```bash
    uv sync
+   uv add asyncio dotenv fastapi ipykernel ipython langchain langchain-mcp-adapters langchain-ollama langchain-tavily "mcp[cli]" pydantic uvicorn
    ```
 
 3. Configurez vos variables d'environnement dans un fichier `.env` :
