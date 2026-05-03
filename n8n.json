@@ -1,0 +1,360 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -304,
+        -96
+      ],
+      "id": "cb9b6ef9-0cd4-46ef-8598-64aa2a09757c",
+      "name": "When chat message received",
+      "webhookId": "932fb969-232d-40a6-84b5-a4b30f08d6bf"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -80,
+        -96
+      ],
+      "id": "56cb8d96-a59e-469c-b377-3af8914b1fe1",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama3.2:latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        128
+      ],
+      "id": "046a20c1-aef4-46d7-aedb-0c68e5aa2448",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "qYbloLGg2OJdUMGR",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Find documents in MongoDB",
+        "collection": "books",
+        "options": {},
+        "query": "{\"pageCount\":{\"$gte\":400}}"
+      },
+      "type": "n8n-nodes-base.mongoDbTool",
+      "typeVersion": 1.2,
+      "position": [
+        -48,
+        240
+      ],
+      "id": "0a9c161f-c509-4855-95d2-42c93e7b60ce",
+      "name": "get all books",
+      "credentials": {
+        "mongoDb": {
+          "id": "N1JnhlIchvmfrSDY",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Find all Java books",
+        "collection": "books",
+        "options": {},
+        "query": "{\"categories\":{\"$in\":[\"Java\"]}}"
+      },
+      "type": "n8n-nodes-base.mongoDbTool",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        240
+      ],
+      "id": "f04cec6e-cd04-4378-b660-3c0b4dfaf3f1",
+      "name": "get all java books",
+      "credentials": {
+        "mongoDb": {
+          "id": "N1JnhlIchvmfrSDY",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "endpointUrl": "http://localhost:2400/mcp",
+        "include": "selected",
+        "includeTools": [
+          "search"
+        ],
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        32,
+        128
+      ],
+      "id": "150d6401-59c2-46fb-9c74-e19ede33dbb4",
+      "name": "chercheur web"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Find all books with pageCount gte 500",
+        "collection": "books",
+        "options": {},
+        "query": "{\"pageCount\":{\"$gte\":500}}"
+      },
+      "type": "n8n-nodes-base.mongoDbTool",
+      "typeVersion": 1.2,
+      "position": [
+        288,
+        80
+      ],
+      "id": "befcbea5-6abb-408f-8894-abdb72afa40d",
+      "name": "books with pageCount gte 500",
+      "credentials": {
+        "mongoDb": {
+          "id": "N1JnhlIchvmfrSDY",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "endpointUrl": "http://localhost:2400/mcp",
+        "include": "selected",
+        "includeTools": [
+          "list_employees"
+        ],
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        384,
+        272
+      ],
+      "id": "a072dcb8-b53d-4d09-858d-9b7146051506",
+      "name": "list of employees"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "http://localhost:2400/mcp",
+        "include": "selected",
+        "includeTools": [
+          "get_employee_by_name"
+        ],
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        480,
+        112
+      ],
+      "id": "5be869bc-d52f-4841-bb93-fe96d191a650",
+      "name": "get employee by name"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "http://localhost:2400/mcp",
+        "include": "selected",
+        "includeTools": [
+          "delete_employee_by_name"
+        ],
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        256,
+        240
+      ],
+      "id": "297c215b-7484-473f-8f43-35116b58f5a0",
+      "name": "delete a employee by name"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Find published books",
+        "collection": "books",
+        "options": {},
+        "query": "{\"status\":\"PUBLISH\"}"
+      },
+      "type": "n8n-nodes-base.mongoDbTool",
+      "typeVersion": 1.2,
+      "position": [
+        640,
+        112
+      ],
+      "id": "18c26e1e-974b-4ca8-ac22-9986e7f88f0a",
+      "name": "find published books",
+      "credentials": {
+        "mongoDb": {
+          "id": "N1JnhlIchvmfrSDY",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -128,
+        112
+      ],
+      "id": "a006ff0a-83fd-4198-ae32-ca5877abd6c1",
+      "name": "Simple Memory"
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get all books": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get all java books": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chercheur web": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "books with pageCount gte 500": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "list of employees": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get employee by name": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "delete a employee by name": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "find published books": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1ffeb7c876b67b555e9cce9a5b32469dfe83e6b4476c269d430e83acebe1b80e"
+  }
+}
