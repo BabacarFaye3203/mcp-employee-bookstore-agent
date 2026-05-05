@@ -76,10 +76,20 @@ Dans votre workflow n8n (référence : **n8n.jpg**) :
 3.  L'agent pourra alors exécuter des fonctions comme `list_employees` ou `get_employee_by_name` directement dans n8n.
 
 ## 📦 Dépendances Principales
-*   **mcp[cli]** : SDK pour le protocole MCP.
-*   **sqlalchemy & psycopg2** : Gestion de la base PostgreSQL.
-*   **langchain-ollama** : Interface pour les modèles locaux.
-*   **fastapi & uvicorn** : Serveur web pour l'agent.
+
+#### Détail des packages installés :
+
+| Package | Usage |
+| :--- | :--- |
+| **mcp[cli]** | SDK officiel pour implémenter le Model Context Protocol et outils de test. |
+| **langchain-mcp-adapters** | Adaptateur permettant d'utiliser les outils MCP comme des outils LangChain standards. |
+| **langchain-ollama** | Connecteur pour l'utilisation de modèles de langage locaux (ex: Llama 3.2). |
+| **langchain-tavily** | Intégration de l'outil de recherche web Tavily pour la recherche augmentée. |
+| **fastapi & uvicorn** | Framework et serveur pour exposer l'API de l'agent. |
+| **sqlalchemy & psycopg2** | ORM et driver pour la communication avec la base de données PostgreSQL. |
+| **pydantic** | Validation stricte des schémas de données pour les employés et les outils. |
+| **asyncio & dotenv** | Gestion de l'asynchronisme et des variables d'environnement confidentielles. |
+| **ipykernel & ipython** | Support pour l'exécution et le test de scripts dans des notebooks Jupyter. |
 
 ---
 
