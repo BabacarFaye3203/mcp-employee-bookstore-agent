@@ -103,7 +103,7 @@ Dans votre workflow n8n (référence : **n8n.jpg**) :
 ---
 
 **Développé par Babacar Faye**
-<img width="1918" height="975" alt="n8n" src="https://github.com/user-attachments/assets/7caabb4e-68b3-4cd4-9eb7-255ee6023abf" />
+<img width="1918" height="970" alt="image" src="https://github.com/user-attachments/assets/32406c76-d7d5-4c5c-8ef8-22b68bb49450" />
 
 <img width="1915" height="962" alt="inspector" src="https://github.com/user-attachments/assets/5c152297-943a-47c9-8e55-eab3eab15d13" />
 
