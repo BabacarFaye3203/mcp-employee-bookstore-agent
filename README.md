@@ -7,7 +7,7 @@ Ce projet implémente un serveur **Model Context Protocol (MCP)** robuste conçu
 ## 🏗️ Architecture Technique
 
 Le projet exploite les dernières avancées de l'écosystème IA :
-*   **Transport :** Utilisation du transport natif **stdio** pour le serveur MCP, permettant une intégration directe avec les hôtes MCP.
+*   **Transport :** Utilisation du transport natif **streamable-http** pour le serveur MCP.
 *   **Abstraction :** Emploi de `langchain-mcp-adapters` pour convertir les outils MCP en outils compatibles LangChain.
 *   **Modèles Locaux :** Intégration native avec **Ollama** via `langchain-ollama` (ex: Llama 3.2).
 *   **Persistance Hybride :** **PostgreSQL** (via SQLAlchemy) pour la gestion RH et **MongoDB** pour le catalogue de livres.
