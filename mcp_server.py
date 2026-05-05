@@ -2,8 +2,6 @@
 from langchain_tavily import TavilySearch
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
-from IPython.display import display, Markdown
-from fastapi import FastAPI,Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from data.employees import Employee
@@ -21,7 +19,6 @@ Base.metadata.create_all(bind=engine)
 load_dotenv(override=True)  
 web_search = TavilySearch(tavily_api_key=os.getenv("TAVILY_API")) 
 mcp=FastMCP(name="mcp_server", host="localhost", port=2400)
-app = FastAPI()
 
 
 employees = [
@@ -73,45 +70,83 @@ def add_employees_to_db():
     db.commit()
 
 @mcp.tool(name="search", description="Search the web for information")
-@app.get("/search")
 def search(query):
     res= web_search.invoke(query)
     return res
 
 
 @mcp.tool(name="list_employees", description="List all employees")
-@app.get("/employees")
 def list_employees():
     db = next(get_db())
     employees = db.query(DBEmployee).all()
-    return employees
+    return [{
+        "id": employee.id,
+        "name": employee.name,
+        "email": employee.email,
+        "position": employee.position,
+        "department": employee.department,
+        "salairy": employee.salairy,
+        "seniority": employee.seniority,
+        "telephone": employee.telephone,
+        "city": employee.city,
+        "country": employee.country
+    } for employee in employees]      
 
-@app.get("/employees/{employee_email}")
 @mcp.tool(name="get_employee_by_email", description="Get employee details by email")
 def get_employee_by_email(employee_email: str):
     db = next(get_db())
     employee = db.query(DBEmployee).filter(DBEmployee.email == employee_email).first()
-    return employee
+    return  {
+        "id": employee.id,
+        "name": employee.name,
+        "email": employee.email,
+        "position": employee.position,
+        "department": employee.department,
+        "salairy": employee.salairy,
+        "seniority": employee.seniority,
+        "telephone": employee.telephone,
+        "city": employee.city,
+        "country": employee.country
+    }
 
-@app.get("/employees/name/{employee_name}")
 @mcp.tool(name="get_employee_by_name", description="Get employee details by name")
 def get_employee_by_name(employee_name: str):
     db= next(get_db())
-    db_employee = db.query(DBEmployee).filter(DBEmployee.name == employee_name).first()
-    if db_employee:
-        return db_employee
+    employee = db.query(DBEmployee).filter(DBEmployee.name == employee_name).first()
+    if employee:
+        return{
+        "id": employee.id,
+        "name": employee.name,
+        "email": employee.email,
+        "position": employee.position,
+        "department": employee.department,
+        "salairy": employee.salairy,
+        "seniority": employee.seniority,
+        "telephone": employee.telephone,
+        "city": employee.city,
+        "country": employee.country
+    }
     return None
 
-@app.post("/employees")
 @mcp.tool(name="add_employee", description="Add a new employee")
 def add_employee(employee: Employee):
     db = next(get_db())
     db.add(employee)
     db.commit()
     db.refresh(employee)
-    return employee
+    return  {
+        "id": employee.id,
+        "name": employee.name,
+        "email": employee.email,
+        "position": employee.position,
+        "department": employee.department,
+        "salairy": employee.salairy,
+        "seniority": employee.seniority,
+        "telephone": employee.telephone,
+        "city": employee.city,
+        "country": employee.country
+    }
 
-@app.delete("/employees/name/{name}")
 @mcp.tool(name="delete_employee_by_name", description="Delete an employee by name")
 def delete_employee_by_name(name: str):
     db = next(get_db())
@@ -122,7 +157,6 @@ def delete_employee_by_name(name: str):
         return {"message": f"Employee with name {name} deleted"}
     return {"message": "Employee not found"}
 
-@app.delete("/employees/{employee_email}")
 @mcp.tool(name="delete_employee_by_email", description="Delete an employee by email")
 def delete_employee_by_email(employee_email: str):
     db = next(get_db())
@@ -133,7 +167,7 @@ def delete_employee_by_email(employee_email: str):
         return {"message": f"Employee with email {employee_email} deleted"}
     return {"message": "Employee not found"}
 
-@app.put("/employees/{employee_email}")
+
 @mcp.tool(name="update_employee_by_email", description="Update employee details by email")
 def update_employee_by_email(employee_email: str, updated_employee: Employee):
     db = next(get_db())
@@ -143,9 +177,20 @@ def update_employee_by_email(employee_email: str, updated_employee: Employee):
             setattr(employee, key, value)
         db.commit()
         db.refresh(employee)
-        return employee
+        return  {
+        "id": employee.id,
+        "name": employee.name,
+        "email": employee.email,
+        "position": employee.position,
+        "department": employee.department,
+        "salairy": employee.salairy,
+        "seniority": employee.seniority,
+        "telephone": employee.telephone,
+        "city": employee.city,
+        "country": employee.country
+    }
     return None
 
 if __name__ == "__main__":
-    add_employees_to_db()
+    # add_employees_to_db()
     mcp.run(transport="streamable-http")
